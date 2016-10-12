@@ -1,0 +1,2 @@
+pointer-events: none ----如果你已经设置一个元素的css属性为pointer-events: none。它将不会捕获任何click事件，而是让事件穿过该元素到达下面的元素。
+ 
