@@ -3,7 +3,7 @@
  *没有new
  *每个对象都有一套自己的方法，--浪费资源
  */
-<code>  
+<pre>  
 function CreatePerson(name,sex){
 	//原材料   new一个对象
 	var obj = new Object();
@@ -27,7 +27,7 @@ p1.showSex();
 p2.showName();
 p2.showSex();
 alert(p1.showName == P2.showName)  // false  
-<code>  
+<pre>  
 
 /*
  *混合法
