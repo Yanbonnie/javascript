@@ -27,7 +27,7 @@ p1.showSex();
 p2.showName();
 p2.showSex();
 alert(p1.showName == P2.showName)  // false  
-<pre>  
+</pre>  
 
 /*
  *混合法
@@ -37,6 +37,7 @@ alert(p1.showName == P2.showName)  // false
  *class  -----改变一类元素的样式  prototype
  *行间样式 ---改变一个元素的样式  给 一个对象添加方法
  */
+ <pre>
  function CreatePerson(name,sex){
 	 
 	//假想的系统内部工作流程
@@ -64,7 +65,7 @@ p1.showSex();
 p2.showName();
 p2.showSex();
 alert(p1.showName == p2.showName)   //true
- 
+</pre>
  
  
 /*类		     模子    在js中构造函数就是类，类就是构造函数   Array (类)  new Array (构造函数)
@@ -77,9 +78,10 @@ alert(p1.showName == p2.showName)   //true
  *原型的一个重要功能（应用） -- 可以扩展系统对象
  *eg：给String类添加方法
  */
-  
+ <pre>
  String.prototype.trim=function(){
 	 return this.replace(/^\s+|\s+$/,"");
  }
  var str = '      abc   de    ';
  alert('('+str.trim()+')');   //(abc   de)
+</pre>
