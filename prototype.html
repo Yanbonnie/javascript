@@ -85,3 +85,41 @@ alert(p1.showName == p2.showName)   //true
  var str = '      abc   de    ';
  alert('('+str.trim()+')');   //(abc   de)
 </pre>
+
+
+//面向对象之继承--终结版
+<pre>
+function Person(name,sex){	
+		this.name = name;
+		this.sex = sex;		
+	}
+	Person.prototype.showName = function(){		
+		alert(this.name);
+	}
+	
+	Person.prototype.showSex = function(){		
+		alert(this.sex);
+	}
+	
+	function Worker(name,sex,job){		
+		//this -> new 出来的Worker对象
+		//构造函数伪装 调用了父级构造函数 - 为了继承属性
+		Person.call(this,name,sex);  		
+		this.job = job;		
+	}
+	
+	//原型链  通过原型来继承父级的方法  此方式子类会影响父类，不建议使用
+	//Worker.prototype = Person.prototype;   
+	
+	for(var i in Person.prototype){	
+		Worker.prototype[i] = Person.prototype[i];	
+	}
+	
+	Worker.prototype.showJob = function(){	
+		alert(this.job)		
+	}
+	
+	var ow1 = new Worker('blue','男','打杂的');
+	ow1.showSex();
+	//alert(Person.prototype.showJob)
+</pre>
