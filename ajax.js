@@ -1,7 +1,8 @@
 
 /*
  ajax封装成一个函数
- ajax('abc.txt',function(str){
+ ajax('abc.json',function(str){
+ 	str = eval(str);
 	alert(str)	
   },function(){
 	  alert("失败了")
