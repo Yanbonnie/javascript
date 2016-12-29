@@ -28,7 +28,7 @@ function ajax(url, fnSucc, fnFaild)
 	}
 	
 	//2.连接服务器
-	//open(方法, url, 是否异步)
+	//open(方法, url, 是否异步)   同步：事情一件一件来，异步：多个事情可以一起做 √	
 	oAjax.open('GET', url, true);
 	
 	//3.发送请求
@@ -40,7 +40,7 @@ function ajax(url, fnSucc, fnFaild)
 	{
 		if(oAjax.readyState==4)
 		{
-			if(oAjax.status==200)
+			if(oAjax.status==200)//http状态码
 			{
 				//alert('成功：'+oAjax.responseText);
 				fnSucc(oAjax.responseText);
@@ -49,7 +49,7 @@ function ajax(url, fnSucc, fnFaild)
 			{
 				if(fnFaild)
 				{
-					fnFaild();
+					fnFaild(oAjax.status);
 				}
 			}
 		}
