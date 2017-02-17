@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1{
+				width: 500px;
+				margin: 50px auto;
+				
+			}
+			#div1 a{
+					margin: 0 5px;
+					display: inline-block;
+				}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				page({
+					id : 'div1',
+					nowPage:1,
+					allPage:10,
+					callback:function(now,all){
+						console.log("当前页是："+now+"总页数："+all )
+					}
+				})				
+				function page(obj){
+					if(!obj.id){return false;}  
+					
+					var oDiv = document.getElementById(obj.id);	
+					var nowPage = obj.nowPage || 1;
+					var allPage = obj.allPage || 5;
+					var callback = obj.callback || function(){};
+					
+					//出现首页的情况
+					if(nowPage>=4 && allPage >= 6){
+						var oA = document.createElement('a');
+						oA.href = "#1";
+						oA.innerHTML = "首页";
+						oDiv.appendChild(oA);
+					}
+					
+					//出现上一页的情况
+					if(nowPage >= 2 && allPage >= 6){  
+						var oA = document.createElement('a');
+						oA.href="#"+(nowPage-1);
+						oA.innerHTML = "上一页";
+						oDiv.appendChild(oA)
+					}
+					
+					//五页之内的中间区域的情况
+					if(allPage <= 5){
+						for(var i=1;i<=allPage;i++){
+							var oA = document.createElement('a');
+							oA.href = "#" + i;
+							if(nowPage == i){
+								oA.innerHTML = i
+							}else{
+								oA.innerHTML = "["+i+"]";
+							}							
+							oDiv.appendChild(oA)
+						}
+					}
+					//五天之外的（中间部分）情况
+					else{
+						for(var i=1;i<=5;i++){
+							var oA = document.createElement('a');
+							//解决当nowPage=1 or nowPage=2 的出现-1 or 0 的情况
+							if(nowPage == 1 || nowPage == 2){  
+								oA.href = '#'+i;
+								if(nowPage == i){
+									oA.innerHTML = i;
+								}else{
+									oA.innerHTML = "["+i+"]";
+								}				
+							}
+							//解决当nowPage=allPage or nowPage=(allPage-1) 的出现大于allPage的情况
+							else if( (allPage - nowPage) == 0 || (allPage - nowPage) == 1){   
+								
+								oA.href = "#"+ ( allPage - 5 + i);
+								
+								if( (allPage - 5 + i) == nowPage ){
+									
+									oA.innerHTML = (allPage - 5 + i);
+									
+								}else{
+									
+									oA.innerHTML ="["+ (allPage-5+i) +"]";
+								}
+							}
+							//一般情况   
+							else{
+								oA.href = "#"+(nowPage-3+i);
+								if(i == 3){
+									oA.innerHTML = (nowPage-3+i)
+								}else{
+									oA.innerHTML ="["+(nowPage-3+i)+"]";
+								}							
+							}
+							
+							oDiv.appendChild(oA);
+						}
+						
+					}
+					
+					//出现下一页的情况
+					if( (allPage - nowPage) >= 1 && allPage >= 6){
+						var oA = document.createElement('a');
+						oA.href = '#'+(nowPage+1);
+						oA.innerHTML="下一页";
+						oDiv.appendChild(oA)
+					}
+					//出现尾页的情况
+					if( (allPage - nowPage) >= 3 && allPage >= 6){
+						var oA = document.createElement('a');
+						oA.href = '#'+allPage;
+						oA.innerHTML="尾页";
+						oDiv.appendChild(oA)
+					}
+					
+					var oSpan = document.createElement('span');
+					oSpan.innerHTML = nowPage+'/'+allPage;
+					oDiv.appendChild(oSpan);
+					
+					callback(nowPage,allPage);
+					
+					var aA = document.getElementsByTagName('a');
+					for(var i=0; i<aA.length;i++){
+						aA[i].onclick = function(){
+							var nowPage = parseInt(this.getAttribute('href').substring(1));
+							oDiv.innerHTML = '';
+							//console.log(obj.id)
+							page({
+								id:obj.id,
+								nowPage:nowPage,
+								allPage:allPage,
+								callback:callback
+							})							
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<!--<a href="#1">首页</a>
+			<a href="#3">上一页</a>
+			<a href="#2">[2]</a>
+			<a href="#3">[3]</a>
+			<a href="#4">4</a>
+			<a href="#5">[5]</a>
+			<a href="#6">[6]</a>
+			<a href="#5">下一页</a>
+			<a href="#10">尾页</a>-->			
+		</div>
+	</body>
+</html>
