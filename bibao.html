@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>闭包</title>
+		<script type="text/javascript">
+			/*
+			 * 什么是闭包  ：
+			 * 函数嵌套函数，内部函数可以引用外部函数的参数和变量,参数和变量不会被垃圾回收机制收回。（垃圾回收机制）
+			 * 好处：
+			 * 1.希望一个变量长期驻扎在内存当中
+			 * 2.避免全局变量的污染
+			 * 3.私有成员的存在
+			 * 用法：
+			 * 1.模块化代码
+			 * 2.在循环中直接找到对应的索引
+			 * IE下会引发内存泄露
+			 */
+			/*function aaa(){
+				var a = 1;
+				return function(){
+					a++;
+					alert(a);
+				}
+			}
+			
+			var b = aaa();
+			b();   //2
+			b();   //3
+			*/
+			
+			/*var aaa = (function(){
+				var a = 1;
+				return function(){
+					a++;
+					alert(a)
+				}
+			})()
+			
+			aaa();  //2
+			aaa();  //3
+			*/
+			
+			/*var aaa = (function(){
+				var a = 1;
+				function bbb(){
+					a++;
+					alert(a);
+				}
+				function ccc(){
+					a++;
+					alert(a)
+				}
+				return{
+					b:bbb,
+					c:ccc
+				}
+			})()
+			
+			aaa.b();   //2
+			aaa.c();   //3
+			*/
+			
+			/*
+			 * 在循环中直接找到对应的索引
+			 */
+			/*window.onload = function(){
+				var aLi = document.getElementsByTagName('li');
+				for(var i=0;i<aLi.length;i++){
+//				    (function(i){
+//						aLi[i].onclick = function(){
+//							alert(i);
+//						}
+//					})(i)
+					
+//					aLi[i].onclick = (function(i){
+//						return function(){
+//							alert(i)
+//						}
+//					})(i)
+				}
+			}*/
+			
+			//IE下回引发内存泄露
+			window.onload = function(){
+				var oDiv = document.getElementById('div1'); //获取数组或者document节点
+				//次代码在ie引发内存泄露
+				oDiv.onclick = function(){
+					alert(oDiv.id)
+				}
+				
+				//解决办法一
+				window.onunload = function(){
+					oDiv.onclick = null;
+				}
+				
+				//解决办法二
+				var id = oDiv.id;
+				oDiv.onclick = function(){
+					alert(id);
+				}
+				oDiv = null;
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div1">aaaaaaaaaaa</div>
+		<ul>
+			<li>111</li>
+			<li>111</li>
+			<li>111</li>
+		</ul>
+	</body>
+</html>
