@@ -31,7 +31,15 @@ JSON.parse()和JSON.stringify()
 	结果：
 	JSON.stringify(a)
 	"{"a":1,"b":2}"
-
+	
+js中的call方法和apply方法  ---两者都可以改变this的指向
+	function show(a,b){
+		console.log('this是：'+this+',a是：'+a+',b是:'+b);
+	}			
+	show(12,5)                 //this是：[object Window],a是：12,b是:5
+	show.call('abc',12,5);     //this是：abc,a是：12,b是:5
+	show.apply('abc',[12,5]);  //this是：abc,a是：12,b是:5
+	
 array.splice() 影响原来的数组
 array.slice() 不影响原来的数组	
 	var arr1 = [1,2,3,4,5,6];
