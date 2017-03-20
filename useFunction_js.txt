@@ -1,4 +1,4 @@
-/*获取元素的样式
+/*1、获取元素的样式
  *getStyle(oUl,'width')
  */
 	function getStyle(obj, attr)
@@ -14,7 +14,7 @@
 	}
 
 
-JSON.parse()和JSON.stringify() 
+2、JSON.parse()和JSON.stringify() 
 	parse用于从一个字符串中解析出json对象,如
 	var str = '{"name":"huangxiaojian","age":"23"}'
 	结果：
@@ -32,7 +32,7 @@ JSON.parse()和JSON.stringify()
 	JSON.stringify(a)
 	"{"a":1,"b":2}"
 	
-js中的call方法和apply方法  ---两者都可以改变this的指向
+3、js中的call方法和apply方法  ---两者都可以改变this的指向
 	function show(a,b){
 		console.log('this是：'+this+',a是：'+a+',b是:'+b);
 	}			
@@ -40,8 +40,8 @@ js中的call方法和apply方法  ---两者都可以改变this的指向
 	show.call('abc',12,5);     //this是：abc,a是：12,b是:5
 	show.apply('abc',[12,5]);  //this是：abc,a是：12,b是:5
 	
-array.splice() 影响原来的数组
-array.slice() 不影响原来的数组	
+4、array.splice() 影响原来的数组
+   array.slice() 不影响原来的数组	
 	var arr1 = [1,2,3,4,5,6];
 	var arr2 = arr1.splice(0,3);
 	console.log(arr1)  //[4, 5, 6] 
@@ -51,3 +51,70 @@ array.slice() 不影响原来的数组
 	var arr2 = arr1.slice(0,3);
 	console.log(arr1)  //[1,2,3,4,5,6]
 	console.log(arr2)  //[1, 2, 3]
+	
+5、获取可视区距离顶部的距离  
+	document.documentElement.scrollTop   //ie　火狐没问题　 document.body.scrollTop //chrome
+	兼容  var scrollTop =  document.documentElement.scrollTop || document.body.scrollTop
+
+6、取消冒泡
+     oEvent.cancelBubble = true;
+     
+7、document.oncontextmenu  >右键菜单事件
+     return false  >阻止系统默认的行为
+8、距离可视区域的鼠标值   clientX   clientY
+9、可视区宽度   document.documentElement.clientWidth
+10、移除onmousemove 事件   oDiv.onmousemove = null;
+11、对象.attachEvent(事件名，函数)   --IE独有         对象.detachEvent(事件名，函数)  --解除绑定
+     eg: oBtn.attachEvent('onclick',aaa)
+     对象.addEventListener(事件名，函数 ，是否捕获)  --FF      对象.removeaddEventListener(事件名，函数，是否捕获)
+     oBtn.addEventListener ('click',aaa，false)
+
+12、兼容
+	//谁   什么事件  执行什么函数
+	function myAddEvent(obj,sEvent,fn){
+	     if(obj.attachEvent){
+		  obj.attachEvent('on'+sEvent ,fn)
+	     }else{
+		 obj.addEventListener(sEvent,fn，false)
+	     }
+	}
+	myAddEvent(oBtn,'click',aa);    ----事件调用
+	温馨提示：IE下事件绑定的时候 this指向window而不是对象
+13、JS 打乱数组
+	function randomsort(a, b) {
+		return Math.random()>.5 ? -1 : 1;//用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+	}
+	var arr = [1, 2, 3, 4, 5];
+	arr.sort(randomsort);
+14、随机数
+	// x是随机数上限，y是随机数下限
+	var x = 9;
+	var y = 0;
+	var rand = parseInt(Math.random() * (x - y + 1) + y);
+	console.log(rand）;
+
+	random()方法
+	Math.random()方法返回介于0 到1 之间一个随机数，不包括0 和1。如果想大于这个范
+	围的话，可以套用一下公式：
+	值= Math.floor(Math.random() * 总数+ 第一个值)
+	alert(Math.floor(Math.random() * 10 + 1)); //随机产生1-10 之间的任意数
+	for (var i = 0; i<10;i ++) {
+	document.write(Math.floor(Math.random() * 10 + 5)); //5-14 之间的任意数
+	document.write('<br />');
+	}
+	为了更加方便的传递想要范围，可以写成函数：
+	function selectFrom(lower, upper) {
+	var sum = upper - lower + 1; //总数-第一个数+1
+	return Math.floor(Math.random() * sum + lower);
+	}
+	for (var i=0 ;i<10;i++) {
+	document.write(selectFrom(5,10)); //直接传递范围即可
+	document.write('<br />');
+	}
+15、setTimeout实现定时器
+	setTimeout(function () {
+            cur++;
+            if(cur <= 3){
+                setTimeout(arguments.callee,2000)
+            }
+        },2000)
