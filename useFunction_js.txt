@@ -118,3 +118,13 @@
                 setTimeout(arguments.callee,2000)
             }
         },2000)
+16、获取鼠标在文档的位置
+	function getPos(ev){
+		var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
+		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+		return {x:ev.clientX+scrollLeft,y:ev.clientY+scrollTop}
+	}
+	document.onclick = function(ev){
+		var oEvent = ev || event;
+		alert(getPos(oEvent).x);
+	}
