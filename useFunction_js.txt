@@ -133,3 +133,21 @@
 		var oEvent = ev || event;
 		alert(oEvent.keyCode)
 	}
+18、默认行为（浏览器自身所带的行为）
+	阻止默认行为  return false	
+	//屏蔽右键菜单
+	document.oncontextmenu=function(){
+		return false;
+	}
+	//只能输入数字
+	oTxt.onkeydown=function(ev){
+		var oEvent = ev || event;
+		//0-   48
+		//9-   57
+		//删除键  8 和 46
+		//退格键 37 ←  39 →
+		//alert(oEvent.keyCode)
+		if(oEvent.keyCode != 8 && oEvent.keyCode != 37 && oEvent.keyCode != 39 && (oEvent.keyCode < 48 || oEvent.keyCode > 57)){
+			return false;
+		}
+	}
