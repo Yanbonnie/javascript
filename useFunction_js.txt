@@ -118,7 +118,7 @@
                 setTimeout(arguments.callee,2000)
             }
         },2000)
-16、获取鼠标在文档的位置
+16、获取鼠标在文档的位置 	clientX clientY  鼠标的可视区坐标		
 	function getPos(ev){
 		var scrollTop=document.documentElement.scrollTop || document.body.scrollTop;
 		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
@@ -127,4 +127,9 @@
 	document.onclick = function(ev){
 		var oEvent = ev || event;
 		alert(getPos(oEvent).x);
+	}
+17、键盘事件  获取键盘键码   ctrlKey shiftKey altKey ---oEvent.ctrlKey
+	document.onkeydown=function(ev){
+		var oEvent = ev || event;
+		alert(oEvent.keyCode)
 	}
