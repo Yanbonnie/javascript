@@ -151,3 +151,21 @@
 			return false;
 		}
 	}
+19、localStorage  HTML5 本地存储	
+	var storage ={
+		setLSData:function(key, value){
+			localStorage.setItem(key, JSON.stringify(value));
+		},
+		/*
+		 * 获取localStorage
+		 */
+		getLSData:function(key){
+			return JSON.parse(localStorage.getItem(key));
+		},
+		/*
+		 * 清楚localStorage数据
+		 */
+		removeLSData:function(key){
+			localStorage.removeItem(key);
+		}
+	}
