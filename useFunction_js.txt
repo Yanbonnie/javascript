@@ -200,3 +200,13 @@
 	    }
 	}
 	browserRedirect(); 
+23、IE 浏览器中不能使remove删除节点的解决方法
+<script type="text/javascript">
+function removeElement(_element){
+         var _parentElement = _element.parentNode;
+         if(_parentElement){
+                _parentElement.removeChild(_element);
+         }
+}
+</script>
+<div><input onclick="removeElement(this)" type="text" value="点击移除该输入框" /></div>
