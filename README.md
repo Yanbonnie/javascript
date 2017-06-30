@@ -10,3 +10,11 @@ js基本功能
 2.文本框只能输入数字
 <input onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
 	 onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+	
+3.
+	const sortNumbers = function(...numbers){
+                return numbers.sort();
+        }
+         const srotNum = (...numbers) =>  numbers.sort()
+         console.log(sortNumbers(5,7,2)) // [2,5,7]
+         console.log(srotNum(5,7,2))	 // [2,5,7]
