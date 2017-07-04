@@ -18,3 +18,6 @@ js基本功能
          const srotNum = (...numbers) =>  numbers.sort()
          console.log(sortNumbers(5,7,2)) // [2,5,7]
          console.log(srotNum(5,7,2))	 // [2,5,7]
+	
+4.选文件多次执行onchange方法解决方案 on绑定前面添加unbind
+$("#file").unbind().on('change',function(){})
