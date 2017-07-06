@@ -21,3 +21,13 @@ js基本功能
 	
 4.选文件多次执行onchange方法解决方案 on绑定前面添加unbind
 $("#file").unbind().on('change',function(){})
+
+5.阻止冒泡兼容
+	if (event.stopPropagation) {
+		// this code is for Mozilla and Opera
+		event.stopPropagation();
+	}
+	else if (window.event) {
+		// this code is for IE
+		window.event.cancelBubble = true;
+	}
