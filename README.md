@@ -31,3 +31,22 @@ $("#file").unbind().on('change',function(){})
 		// this code is for IE
 		window.event.cancelBubble = true;
 	}
+
+6.获取当前时间几天内的时间
+  Vue.prototype.getDataFn = function(n){ //n几天内
+  var nowdate = new Date();
+    var Y = nowdate.getFullYear();
+    var M = (nowdate.getMonth()+1) < 10 ? "0"+ (nowdate.getMonth()+1) : (nowdate.getMonth()+1);
+    var D = nowdate.getDate();
+    var currentdate = Y+'-'+M+'-'+D;
+   // nowdate.setMonth(nowdate.getMonth()-1);
+    nowdate.setDate(nowdate.getDate() - n);
+    var y = nowdate.getFullYear();
+    var m = (nowdate.getMonth()+1) < 10 ? "0"+ (nowdate.getMonth()+1) : (nowdate.getMonth()+1);
+    var d = nowdate.getDate();
+    var formatwdate = y+'-'+m+'-'+d;        
+    return {
+        "formatwdate":formatwdate,
+        "currentdate":currentdate
+    }
+  }
