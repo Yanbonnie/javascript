@@ -50,3 +50,7 @@ $("#file").unbind().on('change',function(){})
         "currentdate":currentdate
     }
   }
+7.匹配所有空格正则
+var reg = /\s+/g;
+var str = '  dd  sd  sd ';
+str.replace(reg,'');  把所有空格替换为空
