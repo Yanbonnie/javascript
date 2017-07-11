@@ -54,3 +54,5 @@ $("#file").unbind().on('change',function(){})
 var reg = /\s+/g;
 var str = '  dd  sd  sd ';
 str.replace(reg,'');  把所有空格替换为空
+8.字符串转base64
+let data = new Buffer(JSON.stringify({claimTaskId: '2461946cc68b48688a1604466fb6a579'})).toString("base64");
