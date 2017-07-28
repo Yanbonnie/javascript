@@ -56,3 +56,22 @@ var str = '  dd  sd  sd ';
 str.replace(reg,'');  把所有空格替换为空
 8.字符串转base64
 let data = new Buffer(JSON.stringify({claimTaskId: '2461946cc68b48688a1604466fb6a579'})).toString("base64");
+
+9.数组去重
+Array.prototype.unique3 = function() {
+        var res = [];
+        var json = {};
+        for(var i = 0; i < this.length; i++){
+            //console.log(this[i]);
+            console.log(!json[this[i]]);
+            if(!json[this[i]]){
+                res.push(this[i]);
+                json[this[i]] = 1;
+            }
+        }
+        console.log(json);
+        return res;
+    }
+
+    var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
+    console.log(arr.unique3());
