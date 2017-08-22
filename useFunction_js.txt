@@ -220,4 +220,18 @@ function removeElement(_element){
 	alert(reg.exec(b));//弹出结果>test<,test；是一数组  
 	alert(items);//弹出结果>xyz<,xyz;是一数组  
 	alert(reg.exec(c)[1]);//此获取的是数组的第二个元素，获取结果为asasa  
-
+25.form提交回调函数（后台会返回一个回调函数执行）
+<iframe name="userAuthframe" style="display:none"></iframe>
+function userAuthCallBack(result) {
+        result = parseObj(result);
+        var data = result.data;
+        $('#authButton').text("确定");
+        $(this).attr('data-click','true');
+        if (result.meta.success) {
+		//成功处理
+        }
+    }
+$('#authForm').attr('action', '/sys/auth/userAuthrityStep')
+                    .attr('enctype', 'multipart/form-data')
+                    .attr('target', 'userAuthframe')
+                    .attr('method', 'post').submit();
