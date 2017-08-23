@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script>
+        $('#testapp').click(function(){
+            operUrl = operUrl.replace(/192.168.10.230/g , "m.crazysales.com.au");
+            operUrl = operUrl.replace(/https%3A%2F%2F|http%3A%2F%2F/g, "");
+            var AppUrl = {
+                open: 'crazysalesapp://'+operUrl,
+                AndroidDown: 'market://details?id=com.crazysales.crazysalesandroid&aid=122',
+                IOSDown: 'itms-apps://itunes.apple.com/au/app/id1258512181?mt=8&=122'
+            };
+            //console.log(AppUrl.open);
+            //return;
+            if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i))
+            {
+                window.location.href = AppUrl.open;				//ios app协议
+                var timer = window.setTimeout(function() {
+                    window.location.href = AppUrl.IOSDown;		//ios 下载地址
+                }, 800);
+                
+                $(document).on('visibilitychange webkitvisibilitychange', function() {
+                    var tag = document.hidden || document.webkitHidden;
+                    if (tag) {
+                        clearTimeout(timer);
+                    }
+                });
+                $(window).on('pagehide', function() {
+                    clearTimeout(timer);
+                });
+            }
+            
+            if(navigator.userAgent.match(/android/i))
+            {
+                window.location.href = AppUrl.open;				//android app协议
+                var timer = window.setTimeout(function() {
+                        window.location.href = AppUrl.AndroidDown;	//android 下载地址
+                        //window.location.href = "https://uabm8.app.goo.gl/?link="+operUrl+"&apn=com.crazysales.crazysalesandroid&isi=1258512181&ibi=com.crazysales.crazysalesios&ius=crazysalesapp";
+                }, 800);
+                
+                $(document).on('visibilitychange webkitvisibilitychange', function() {
+                    var tag = document.hidden || document.webkitHidden;
+                    if (tag) {
+                        clearTimeout(timer);
+                    }
+                });
+                $(window).on('pagehide', function() {
+                    clearTimeout(timer);
+                });
+            }
+        });
+
+    </script> -->
+</head>
+<body>
+    <!-- <iframe src="cloudsign://" style="display:none"></iframe> -->
+     <a href="cloudsign://">点击打开</a> 
+</body>
+</html>

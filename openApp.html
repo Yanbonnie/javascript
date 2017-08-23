@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>真宜签，让签署更有效</title>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        var AppUrl = {
+                open: 'cloudsign://',
+                AndroidDown: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.gdca.cloudsign',
+                IOSDown: 'https://itunes.apple.com/cn/app/%E7%9C%9F%E5%AE%9C%E7%AD%BE/id1237561078?mt=8'
+            };
+            if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i))
+            {
+                window.location.href = AppUrl.open;				//ios app协议
+                var timer = window.setTimeout(function() {
+                    window.location.href = AppUrl.IOSDown;		//ios 下载地址
+                }, 2000);
+                
+                $(document).on('visibilitychange webkitvisibilitychange', function() {
+                    var tag = document.hidden || document.webkitHidden;
+                    if (tag) {
+                        clearTimeout(timer);
+                    }
+                });
+                $(window).on('pagehide', function() {
+                    clearTimeout(timer);
+                });
+            }
+            
+            if(navigator.userAgent.match(/android/i))
+            {
+                window.location.href = AppUrl.open;				//android app协议
+                var timer = window.setTimeout(function() {
+                    window.location.href = AppUrl.AndroidDown;	//android 下载地址
+                }, 2000);
+                
+                $(document).on('visibilitychange webkitvisibilitychange', function() {
+                    var tag = document.hidden || document.webkitHidden;
+                    if (tag) {
+                        clearTimeout(timer);
+                    }
+                });
+                $(window).on('pagehide', function() {
+                    clearTimeout(timer);
+                });
+            }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
