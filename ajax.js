@@ -16,9 +16,9 @@ function ajax(url, fnSucc, fnFaild)
 	var oAjax=null;
 	
   //用一个不存在的变量：出错
-  //用一个不存在的属性：undefined
+  //用一个不存在的属性：undefined  undefined在if里面代表false
   //window.XMLHttpResquest IE6不存在的属性
-	if(window.XMLHttpRequest)
+	if(window.XMLHttpRequest)   //将XMLHttpRequest变量转变为window属性
 	{
 		oAjax=new XMLHttpRequest();
 	}
