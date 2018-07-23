@@ -235,3 +235,40 @@ $('#authForm').attr('action', '/sys/auth/userAuthrityStep')
                     .attr('enctype', 'multipart/form-data')
                     .attr('target', 'userAuthframe')
                     .attr('method', 'post').submit();
+26./* 数组包含对象去重 */
+let unique3 = function(arr,field) { //field 以对象中的什么字段去重
+    var hash = {};
+    arr = arr.reduce(function(item, next) {
+        if(next[field]){
+            hash[next[field]] ? '' : hash[next[field]] = true && item.push(next);
+        }else{
+            item.push(next);
+        }
+        return item
+    }, [])
+    return arr;
+}
+
+let arr = [
+    {
+        a:'a1',
+        b:2
+    },
+    {
+        a:'a2',
+        b:3
+    },
+    {
+        a:'a1',
+        b:2
+    },
+    {
+        c:'10',
+        d:0
+    },{
+        c:'10',
+        d:10
+    }
+]
+// unique3(arr,'a')
+console.log(unique3(arr,'c'));
