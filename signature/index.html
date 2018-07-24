@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+    <div id="signature">
+        </div>
+        <div class="nav-left" id="nav-left">
+            <span class="color black active" data-value="#000000"><i></i></span>
+            <span class="color blue" data-value="#0030ff"><i></i></span>
+            <span class="color red" data-value = "#ff503f"><i></i></span>
+            <span class="delete" id="reset"><b class="iconfont icon-del">删除</b></span>
+            <span class="save" id="save"><b class=" iconfont icon-hook ">保存</b></span>
+        </div>
+        <div id="someelement"></div>
+        <script type="text/javascript" src="./js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="./js/jSignature.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                    var devicePixelRatio = window.devicePixelRatio;
+                var canvas = null,
+                ctx = null,
+                w = null,
+                h = null,
+                color = null;
+                // 1.
+                var $sigdiv = $("#signature");
+                $sigdiv.jSignature('init',
+                    {
+                        color:"#000",
+                        lineWidth:'5',
+                        width:window.innerWidth*devicePixelRatio,
+                        height:window.innerHeight*devicePixelRatio
+                    }
+                )
+                $('.jSignature').css({'width':window.innerWidth,'height':window.innerHeight});
+                // 2.重置画布
+                $sigdiv.jSignature("reset"); 
+                
+                //3.获取画布
+                canvas=document.querySelector(".jSignature");
+                
+                // 设置画布背景色
+                ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+                
+                //清除画布背景
+                $("#signature").on('touchstart',function(){
+                    $(this).css({
+                        "background":'#ffffff'
+                    })
+                })
+
+                $('#nav-left .color').on('click',function(){
+                    var val = $(this).attr('data-value');
+                    $(this).addClass('active');
+                    $(this).siblings('.color').removeClass('active');
+                    $sigdiv.jSignature("setColor",val); 
+                    $sigdiv.jSignature("setLineWidth",'6'); 
+                })
+
+                $("#save").click(function(){
+                    if($sigdiv.jSignature('getData','native').length == 0){
+                        alert("请写入您的签名");
+                        return;
+                    }
+                    //将画布内容转换为图片
+                    var datapair = $sigdiv.jSignature("getData", "image");
+                    $('#someelement').show();
+                    $('#someelement').html(`<img src="data:${datapair[0]},${datapair[1]}" style="width:100%"/>`)
+                });
+                
+                $("#reset").click(function(){
+                    let color = $('#nav-left .active').attr('data-value');
+                    $sigdiv.jSignature("reset"); //重置画布，可以进行重新作画.
+                    ctx.clearRect(0,0,window.innerWidth,window.innerHeight);  //清除画布
+                    $("#someelement").html("").hide();
+                    $sigdiv.jSignature("setColor",color); 
+                    $sigdiv.jSignature("setLineWidth",'6'); 
+                });
+
+                $("#reset").click();  //进入页面清除画布
+            }); 
+        </script>
+</body>
+</html>
