@@ -3,29 +3,32 @@
  *没有new
  *每个对象都有一套自己的方法，--浪费资源
  */  
-function CreatePerson(name,sex){
+function CreatePerson1(name,sex){
 	//原材料   new一个对象
+	console.log('----------------------------------------')
 	var obj = new Object();
 	//加工   给对象添加属性和方法
 	obj.name = name;
 	obj.sex = sex;
 	obj.showName = function(){
-		alert('我的名字叫：'+obj.name);
+		console.log('我的名字叫：'+obj.name);
 	}
 	obj.showSex = function(){
-		alert('我的性别是：'+obj.sex);
+		console.log('我的性别是：'+obj.sex);
 	}
+	
 	//出厂
 	return obj;
 }
 
-var p1 = CreatePerson('blue','男');
-var p2 = CreatePerson('leo','女');
+var p1 = CreatePerson1('blue','男');
+var p2 = CreatePerson1('leo','女');
+console.log(p1)
 p1.showName();
 p1.showSex();
 p2.showName();
 p2.showSex();
-alert(p1.showName == P2.showName)  // false  
+console.log(p1.showName == p2.showName)  // false  
  
 
 /*
@@ -37,7 +40,7 @@ alert(p1.showName == P2.showName)  // false
  *行间样式 ---改变一个元素的样式  给 一个对象添加方法
  */
 
- function CreatePerson(name,sex){
+ function CreatePerson2(name,sex){
 	 
 	//假想的系统内部工作流程
 	//var this = new Object();
@@ -48,22 +51,22 @@ alert(p1.showName == P2.showName)  // false
 	//return this
 }
 //方法：所有对象都一样
-CreatePerson.prototype.showName = function()
+CreatePerson2.prototype.showName = function()
 {
-		alert('我的名字叫：'+this.name);
+		console.log('我的名字叫：'+this.name);
 }
-CreatePerson.prototype.showSex = function()
+CreatePerson2.prototype.showSex = function()
 {
-		alert('我的性别是：'+this.sex);
+		console.log('我的性别是：'+this.sex);
 }
-var p1 = new CreatePerson('blue','男');
-var p2 = new CreatePerson('leo','女');
+var p3 = new CreatePerson2('blue','男');
+var p4 = new CreatePerson2('leo','女');
 
-p1.showName();
-p1.showSex();
-p2.showName();
-p2.showSex();
-alert(p1.showName == p2.showName)   //true
+p3.showName();
+p3.showSex();
+p4.showName();
+p4.showSex();
+console.log(p3.showName == p4.showName)   //true
 
  
  
@@ -82,7 +85,7 @@ alert(p1.showName == p2.showName)   //true
 	 return this.replace(/^\s+|\s+$/,"");
  }
  var str = '      abc   de    ';
- alert('('+str.trim()+')');   //(abc   de)
+ console.log('('+str.trim()+')');   //(abc   de)
 
 
 
@@ -93,11 +96,11 @@ function Person(name,sex){
 		this.sex = sex;		
 	}
 	Person.prototype.showName = function(){		
-		alert(this.name);
+		console.log(this.name);
 	}
 	
 	Person.prototype.showSex = function(){		
-		alert(this.sex);
+		console.log(this.sex);
 	}
 	
 	function Worker(name,sex,job){		
@@ -115,9 +118,75 @@ function Person(name,sex){
 	}
 	
 	Worker.prototype.showJob = function(){	
-		alert(this.job)		
+		console.log(this.job)		
 	}
 	
 	var ow1 = new Worker('blue','男','打杂的');
 	ow1.showSex();
 	//alert(Person.prototype.showJob)
+
+console.log('-----------------------------------------------')
+
+/* hasOwnProperty : 看是不是对象自身下面的属性   Object的原型Propertype下面的***************/
+var arr = [];
+arr.num = 10;
+Array.prototype.num2 = 20;
+
+console.log(arr.hasOwnProperty('num'));   //true
+console.log(arr.hasOwnProperty('num2'));  //false
+// console.log(arr.hasOwnProperty('hasOwnProperty'));  //false
+
+/*************** constructor  : 查看对象的构造函数       可以对类型进行判断**********************************/
+var arr = [1,2,3,4];
+console.log(arr.constructor == Array)  //true
+
+// constructor是程序自动生成
+function Aaa(){}
+Aaa.prototype.constructor = Aaa;   //程序自动处理的
+
+var a1 = new Aaa();
+console.log(a1.hasOwnProperty == Object.prototype.hasOwnProperty) //true
+
+
+function Bbb(){}
+// 1.方案一
+Bbb.prototype.name = '小明';
+// 2.方案二
+	// Bbb.prototype = {
+	// 	constructor:Bbb,      //此处一定要写，不然b1.constructor就会指向[Function: Object]
+	// 	name:'小明'
+	// }
+
+var b1 = new Bbb();
+console.log(b1.constructor)   //[Function: Bbb]
+
+for(var attr in Bbb.prototype){   //for in   只能找到name，系统的prototype是找不到的
+	console.log(attr)   //name  
+}
+
+
+/*********instanceof : 对象与构造函数在原型链上是否有关系  可以对类型进行判断*************/
+console.log('对象与构造函数在原型链上是否有关系')
+console.log(b1 instanceof Bbb)      //true
+console.log(b1 instanceof Object)   //true
+console.log(b1 instanceof Array)    //false
+
+
+/*********toString******************** 
+ * 所有系统对象和自己写的构造对象，都有toString方法
+ * 系统对象下面都是自带的，在系统对象的prototype，自己写的对象都是通过原型链找Object下面的
+ * 
+ * 作用：
+ * 	1.把对象转成字符串
+ * 	2.进制转换
+ *  3.利用toString做类型的判断（推荐的写法）
+ * */
+
+ console.log(arr.toString == Object.prototype.toString)  //false
+ console.log(a1.toString == Object.prototype.toString);  //true
+
+console.log( arr.toString())   //1,2,3,4
+var num = 12;
+console.log(num.toString(2))   //1100
+// 类型判断
+console.log(Object.prototype.toString.call([1,2,3]))  //[object Array]
