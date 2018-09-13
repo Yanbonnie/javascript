@@ -90,7 +90,8 @@ console.log(p3.showName == p4.showName)   //true
 
 
 //面向对象之继承--终结版
-
+// 属性的继承  调用父类的构造函数  call
+// 方法的继承
 function Person(name,sex){	
 		this.name = name;
 		this.sex = sex;		
@@ -106,14 +107,14 @@ function Person(name,sex){
 	function Worker(name,sex,job){		
 		//this -> new 出来的Worker对象
 		//构造函数伪装 调用了父级构造函数 - 为了继承属性
-		Person.call(this,name,sex);  		
+		Person.call(this,name,sex);     //属性继承		
 		this.job = job;		
 	}
 	
 	//原型链  通过原型来继承父级的方法  此方式子类会影响父类，不建议使用
 	//Worker.prototype = Person.prototype;   
 	
-	for(var i in Person.prototype){	
+	for(var i in Person.prototype){	     //方法的继承  for in ：拷贝继承（jquery也是采用拷贝继承extend）
 		Worker.prototype[i] = Person.prototype[i];	
 	}
 	
