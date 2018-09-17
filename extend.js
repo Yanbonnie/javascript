@@ -6,3 +6,5 @@ function CreatePerson(name,sex){
 CreatePerson.prototype.showName = function(){
     
 }
+
+// 原型继承：
