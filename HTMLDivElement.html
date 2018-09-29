@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .flexWrap{                                                                                       
+            width: 100px;
+            height: 100px;
+            background: #ff503f;
+        }
+    </style>
+    <script>
+            // HTMLDivElement.prototype._tap = function(fn) {  //大于120ms即可算点击
+            //     let { left, top, height, width } = this.getBoundingClientRect();
+            //     let timer = null;
+            //     let t = 0; 
+            //     this.addEventListener('touchstart', function(e) { 
+            //         clearInterval(timer);                   
+            //         t = 0 ;
+            //         timer = setInterval(function(){
+            //             t++;
+            //         },60)
+            //     })
+            //     this.addEventListener('touchend', function(e) {
+            //         let { clientX, clientY } = e.changedTouches[0]
+            //         if (clientX > left && clientX < left + width) {
+            //         if (clientY > top && clientY < top + height) {
+            //             if(t >= 2){
+            //                 fn(e)
+            //             }
+            //         }
+            //         }
+            //         clearInterval(timer);
+            //     })
+            // }
+            
+            HTMLDivElement.prototype._tap = function(fn) {
+                let ele = this
+                this.addEventListener('touchstart', function(e) {
+                    // alert('touchstart')
+                    console.log('touchstart')
+                })
+                this.addEventListener('touchend', function(e) {
+                    // alert('touchend')
+                    console.log("touchend")
+                    let { left, top, height, width } = ele.getBoundingClientRect()
+                    let { clientX, clientY } = e.changedTouches[0]
+                    if (clientX > left && clientX < left + width) {
+                    if (clientY > top && clientY < top + height) {
+                        this.fn = fn
+                        this.fn(e)
+                    }
+                    }
+                })
+            }
+            window.onload = function(){
+                document.getElementById("flexWrap")._tap(function(e){
+                    console.log("我被点了")
+                });
+            }
+
+        </script>
+</head>
+<body>
+    <div class="flexWrap" id="flexWrap">aaaaaaa
+    </div>
+    
+</body>
+</html>
