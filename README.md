@@ -75,3 +75,5 @@ Array.prototype.unique3 = function() {
 
     var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
     console.log(arr.unique3());
+10.for循环
+（声明;条件;执行）{执行}
